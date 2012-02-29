@@ -12,11 +12,17 @@ def main():
     #user = "ruoranwang"
     #repo = "IITVs"
     user_list = get_watchers(user, repo)
-    
+   
+    list_repo_list = [] 
     for user in user_list:
-        print user
-        print get_repos(user)
-        print "\n"
+        list_repo_list.append( get_repos(user) )
+    
+    for repo_list in list_repo_list:
+        for item in repo_list:
+            print "User: {}, Repo: {}".format(item[0],item[1]),
+            print get_watchers(item[0],item[1])
+            print 
+            
 
 def get_repos(user):
     repos = []
@@ -24,7 +30,7 @@ def get_repos(user):
                     .format(user=user))
     json_list = json.loads(r.text)
     for repo in json_list:
-        repos.append(repo["name"])
+        repos.append([user, repo["name"]])
     return repos
 
 def get_watchers(user, repo):
