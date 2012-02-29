@@ -22,11 +22,11 @@ mkdir /var/www/html
 /etc/init.d/apache2 restart
 
 apt-get install rcconf
-apt-get install python-pip
 apt-get install mysql
 apt-get install ntp 
+
+apt-get install python-pip
 
 apt-get install git
 git config --global user.name "Ruoran Wang"
 git config --global user.email "ruoranwang@gmail.com"
-
