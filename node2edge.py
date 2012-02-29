@@ -36,12 +36,14 @@ def main():
 
     edge_pair = {}
     node_lines = node.readlines()
+    node.close()
   
     attrs = node_lines[0].split(",")
+    print attrs
     attrs = [item.strip() for item in  attrs]
-    attrs = attrs.remove(attrs[0])    
+    print attrs
+    attrs.remove(attrs[0])    
     length = len(attrs)
-
 
     lines = [] 
     first = True 
@@ -53,31 +55,41 @@ def main():
         words = [item.strip() for item in words] # strip space and line return
         lines.append(words)
 
+    edge_list = Edges() 
     for line in lines:
         for compare_line in lines:
             if line == compare_line:
                 continue
             for i in range(1,length+1):
                 if line[i] == compare_line[i]:
-                    add(line[0], compare_line[0], attrs[i-1])
+                    edge_list.add(line[0], compare_line[0])
 
-def class edges():
-    def __init__():
+    edge.write("Source, Target, Count\n")
+    for item in edge_list.pairs:
+        edge.write("{}, {}, {}\n".format(item['name'][0],\
+                                         item['name'][0],\
+                                         item['count']))
+    edge.close()
+
+class Edges():
+    def __init__(self):
         self.pairs = []     
-        self.commons = []
-        self.count = []
 
-    def add(a, b, attr):
-        for item in self.pairs:
-            if a in item and b in item:
-                self.commons.append(attr)
-            else:
-                self.paris.append([a,b])
-                self.commons.append(attr)
+    def add(self, a, b, attr=""):
+        e = {}
+        #if len(self.pairs) == 0:
+        #    e['name'] = (a,b)
+        #    e['count'] = 1
+        #    self.pairs.append(e)
+        #    return
             
-
-                 
-        
+        for i in range(0,len(self.pairs)):
+            if a in self.pairs[i]['name'] and b in self.pairs[i]['name']:
+                self.pairs[i]['count'] += 1
+                return
+        e['name'] = (a,b)
+        e['count'] = 1
+        self.pairs.append(e)
         
 
 if __name__ == "__main__":
@@ -116,7 +128,5 @@ for line in lines_lists:
             write_line = "{0},{1},{2}\n".format(line[0],compare_line[0],year)
             edge.write(write_line)
 
-node.close()
-edge.close()
 
 sys.exit(0)
