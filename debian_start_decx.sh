@@ -7,6 +7,7 @@ apt-get upgrade
 apt-get install sudo
 apt-get install aptitude
 apt-get install vim
+apt-get install nmap
 
 export EDITOR=vi
 touch /etc/vim/vimrc.local
@@ -29,4 +30,8 @@ apt-get install python-pip
 
 apt-get install git
 git config --global user.name "Ruoran Wang"
-git config --global user.email "ruoranwang@gmail.com"
+git config --global user.email "dashuiwa@gmail.com"
+
+
+# ln -sf /usr/share/zoneinfo/CST6CDT localtime 
+
