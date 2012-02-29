@@ -57,18 +57,19 @@ def main():
 
     edge_list = Edges() 
     for line in lines:
-        for compare_line in lines:
+        i = lines.index(line)
+        for compare_line in lines[i:]:
             if line == compare_line:
                 continue
             for i in range(1,length+1):
                 if line[i] == compare_line[i]:
                     edge_list.add(line[0], compare_line[0])
 
-    edge.write("Source, Target, Count\n")
+    edge.write("Source,Target,Count\n")
     for item in edge_list.pairs:
-        edge.write("{}, {}, {}\n".format(item['name'][0],\
-                                         item['name'][0],\
-                                         item['count']))
+        edge.write("{},{},{}\n".format(item['name'][0],\
+                                       item['name'][1],\
+                                       item['count']))
     edge.close()
 
 class Edges():
@@ -77,11 +78,6 @@ class Edges():
 
     def add(self, a, b, attr=""):
         e = {}
-        #if len(self.pairs) == 0:
-        #    e['name'] = (a,b)
-        #    e['count'] = 1
-        #    self.pairs.append(e)
-        #    return
             
         for i in range(0,len(self.pairs)):
             if a in self.pairs[i]['name'] and b in self.pairs[i]['name']:
@@ -95,38 +91,3 @@ class Edges():
 if __name__ == "__main__":
     main()
 
-node = open("hello.csv", "r")
-edge = open("out_edge.csv", "w")
-major = []
-year = []
-
-node_lines = node.readlines()
-
-lines_lists = []
-
-first = True 
-for line in node_lines:
-    if first:
-        first = False
-        continue
-    words = line.split(",")
-    words = [item.strip() for item in words] # strip space and line return
-    lines_lists.append(words)
-    if words[2] not in year:
-        year.append(words[2])
-    if words[3] not in major:
-        major.append(words[2])
-
-for line in lines_lists:
-    major = line[3]
-    year = line[2]
-    for compare_line in lines_lists:
-        if major == compare_line[3]:
-            write_line = "{0},{1},{2}\n".format(line[0],compare_line[0],major)
-            edge.write(write_line)
-        if year == compare_line[2]:
-            write_line = "{0},{1},{2}\n".format(line[0],compare_line[0],year)
-            edge.write(write_line)
-
-
-sys.exit(0)
