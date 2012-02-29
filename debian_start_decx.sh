@@ -29,9 +29,7 @@ apt-get install ntp
 apt-get install python-pip
 
 apt-get install git
-git config --global user.name "Ruoran Wang"
-git config --global user.email "dashuiwa@gmail.com"
-
-
+#git config --global user.name ""
+#git config --global user.email "" 
 # ln -sf /usr/share/zoneinfo/CST6CDT localtime 
 
