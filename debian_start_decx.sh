@@ -27,6 +27,7 @@ apt-get install mysql
 apt-get install ntp 
 
 apt-get install python-pip
+pip install pylint
 
 apt-get install git
 #git config --global user.name ""
