@@ -70,5 +70,3 @@ def prettify(rjson):
 
 if __name__ == '__main__':
     main()
-
-
