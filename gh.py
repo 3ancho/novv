@@ -18,13 +18,23 @@ def main():
     list_repo_list = [] 
     for user in user_list:
         list_repo_list.append( get_repos(user) )
-    
+   
+    connects = {} 
+
     for repo_list in list_repo_list:
         for item in repo_list:
-            print "User: {}, Repo: {}".format(item[0],item[1]),
-            print get_watchers(item[0],item[1])
-            print 
-            
+            for user in get_watchers(item[0],item[1]):
+                 
+                if user == item[0]:
+                    continue
+                key = "{},{}".format(item[0],user)
+                if key in connects:
+                    connects[key] += 1
+                else:
+                    connects[key] = 1
+
+    for key, value in connects.iteritems():
+        print key, value
 
 def get_repos(user):
     repos = []
@@ -43,7 +53,6 @@ def get_watchers(user, repo):
     for watcher in json_list:
         watchers.append(watcher['login'])
     return watchers
-
 
 if __name__ == "__main__":
     main()
