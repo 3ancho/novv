@@ -92,5 +92,15 @@ def get_watchers(user, repo):
             watchers.append(watcher['login'])
     return watchers
 
+def get_followers(user):
+    followers = []
+    r = requests.get("https://api.github.com/users/{user}/followers"
+                    .format(user=user))
+    json_list = json.loads(r.text)
+    for user in json_list:
+        followers.append(user['login'])
+    return followers
+
+
 if __name__ == "__main__":
     main()
