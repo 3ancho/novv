@@ -26,7 +26,6 @@ def main():
             if count == 1:
                 break
             key = "{},{}".format(user, follower)
-            print key
             if key in connections:
                 connections[key] += 1
             else:
@@ -36,13 +35,10 @@ def main():
     pickle.dump(connections, f_dict)
     f_dict.close()
 
-    f = open("gh.dat","w")
-    for key, value in connects.iteritems():
+    f = open("{0}.dat".format(pname), "w")
+    for key, value in connections.iteritems():
         f.write("{}, {}\n".format(key, value))
     f.close()
- 
-
-
 
 if __name__ == '__main__':
 	main()

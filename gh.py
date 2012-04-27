@@ -5,6 +5,7 @@ import requests
 import simplejson as json
 import sys
 import pickle
+import time
 
 def main():
     if len(sys.argv) != 3:
@@ -22,7 +23,7 @@ def main():
             print "done"
             break
         watchers.extend(temp)
-    output = open("watchers.pkl", "wb")
+    output = open("{0}_watchers.pkl".format(repo) , "wb")
     pickle.dump(watchers, output)
     output.close()
     
@@ -98,7 +99,15 @@ def get_followers(user):
                     .format(user=user))
     json_list = json.loads(r.text)
     for user in json_list:
-        followers.append(user['login'])
+        try:
+            followers.append(user['login'])
+        except TypeError:
+            print "A type Error at"
+            print user
+            print "sleep for 1 hour" 
+            time.sleep(3600)
+            print "Wake up, continue" 
+            continue
     return followers
 
 
